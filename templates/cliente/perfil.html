@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div>
+            {{cliente.index}}
+        </div><div>
+            {{cliente.usuario}}
+        </div><div>
+                {{cliente.vencimiento}}
+        </div><div>
+            {{cliente.nombre}}
+        </div><div>
+            {{cliente.link}}
+        </div>
+    
+        <div>
+            <a href={% url 'apps.core:extender' cliente.usuario %} class="btn btn-primary">Extender</a>
+        </div>
+    </div>
+{% endblock %}

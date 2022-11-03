@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <div class="container">
+            <span>{{creditos}}</span>
+            <form method="get">
+                <div class="row">
+
+                    <div class="col-8">
+                        <input type="text" placeholder="Buscar..."  class="form-control" name="buscar"></input>
+                    </div>
+                    <div class="col-4">
+                        
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container table-responsive">
+            <table class="table table-sm">
+                <tr>
+                    <th>*</th>
+                    {% comment %} <th>Usuario</th> {% endcomment %}
+                    <th>Nombre</th>
+                    <th>Vencimiento</th>
+                    <th>Agregar</th>
+                </tr>
+                {% for i in data %}
+                <tr>
+                    <td>{{i.index}}</td>
+                    {% comment %} <td>{{i.usuario}}</td> {% endcomment %}
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.vencimiento_set}}  | {{i.dias_a_vencer}} dias</td>
+                    <td><a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-secondary">Ver</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div> 
+{% endblock  %}    

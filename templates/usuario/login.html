@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-xs-12 col-sm-6 col-md-12" style="display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+margin-top: 10rem;">
+    <!-- <h4>Iniciar sesion.</h4> -->
+    <form action="" method="POST" class="form-group" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input class="form-control mt-2 p-2" name="username" placeholder="Nombre de usuario"></input>
+        </div>
+        <div class="mb-3">
+            <input type="password"class="form-control mt-2 p-2" name="password" placeholder="Contraseña"></input>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" style="border-color:#D17901;background-color:#D17901;font-family:Roboto" type="submit">INICIAR SESION</button>
+          </div>
+    </form>
+</div>
+{% endblock %}
