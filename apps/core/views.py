@@ -1,5 +1,4 @@
 from multiprocessing import context
-import turtle
 from django.shortcuts import render, redirect
 from urllib.request import urlopen
 import re
