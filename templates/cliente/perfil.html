@@ -17,4 +17,16 @@
             <a href={% url 'apps.core:extender' cliente.usuario %} class="btn btn-primary">Extender</a>
         </div>
     </div>
+    <hr></hr>
+    <!--MODIFICAR USUARIO-->
+    <div class="container">
+        <h2 class="mt-4">Modificar Usuario</h2>
+        <form action="modificar" method="POST" class="form-group mt-4" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input name="last_user" value="{{cliente.usuario}}" hidden></input>
+            <input class="form-control mb-2" placeholder="Usuario" name="usuario"></input>
+            <input class="form-control mb-2" placeholder="Nombre del cliente" name="nombre"></input>
+            <button class="btn btn-success" type="submit">Modificar</button>
+        </form>
+    </div>
 {% endblock %}

