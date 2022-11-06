@@ -97,3 +97,15 @@ def Profile(request,id):
 def Extender(request,usuario):
     # print(f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&ext=1")
     return redirect(f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&ext=1")
+
+
+def Crear(request):
+    if request.method == "POST":
+        nombre = request.POST.get('nombre')
+        usuario = request.POST.get('usuario')
+        
+        print(nombre, usuario)
+        return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&com={nombre}')
+
+    else:
+        return render(request, 'cliente/crear.html')

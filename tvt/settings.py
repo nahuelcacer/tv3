@@ -27,9 +27,9 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 SECRET_KEY = 'django-insecure-+z$l!242m&5t=w5d##5pel4=h=syby4cn59=)v9a^##g%hx@sq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'tvt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
