@@ -12,9 +12,12 @@
         </div><div>
             <b>Link:</b> {{cliente.link}}
         </div>
-    
-        <div>
-            <a href={% url 'apps.core:extender' cliente.usuario %} class="btn btn-primary">Extender</a>
+        {% if url_short %}
+        <h2>{{url_short.url}}</h2>
+        {% endif %}
+        <div class="mt-4">
+            <a href='{% url 'apps.core:extender' cliente.usuario %}' class="btn btn-primary mr-4">Extender</a>
+            <a href='{% url 'apps.core:acortar' cliente.index %}' class="btn btn-outline-primary">Generar URL</a>
         </div>
     </div>
     <hr></hr>

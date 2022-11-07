@@ -79,7 +79,11 @@ def Index(request):
 
 def Profile(request,id):
     data = getDataofPage(request.user.first_name)
-    #####
+    ####      ####   ############ 
+    #######   ####   ####     
+    #### #### ####   ####
+    ####   #######   ####
+    ####      ####   ############ 
     formattedData = formatterData(data)
     clientes = formattedData['data']
     cliente = []
@@ -89,6 +93,9 @@ def Profile(request,id):
     context = {
         'cliente':cliente[0]
     }
+    usuario_cliente = cliente[0]['usuario']
+    long_url = f"http://198.23.223.196/hSsfQeSmxkdW_mtv?{usuario_cliente}&v=10"
+    # print(ShortUrl(long_url))
     
     return render(request,'cliente/perfil.html', context)
     
@@ -119,3 +126,38 @@ def Modificar(request):
         
         print(nombre, usuario, last_user)
         return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={last_user}&new={usuario}&com={nombre}')
+
+
+
+###########################ACORTAR URL#################################################
+
+def ShortUrl(url):
+    import bitly_api
+    Access_token = "499301b1ee741c2e69c40b020507bb3c43a7cb38"
+    connection = bitly_api.Connection(access_token=Access_token)
+    shorten_url = connection.shorten(url)
+    return shorten_url
+def Acortar(request,id):
+    data = getDataofPage(request.user.first_name)
+    ####      ####   ############ 
+    #######   ####   ####     
+    #### #### ####   ####
+    ####   #######   ####
+    ####      ####   ############ 
+    formattedData = formatterData(data)
+    clientes = formattedData['data']
+    cliente = []
+    for i in clientes:
+        if int(i['index']) == id:
+            cliente.append(i)
+    usuario_cliente = cliente[0]['usuario']
+    long_url = f"http://198.23.223.196/hSsfQeSmxkdW_mtv?{usuario_cliente}&v=10"
+    # print(ShortUrl(long_url))
+    url_short = ShortUrl(long_url)
+    print(url_short)
+    context = {
+        'cliente':cliente[0],
+        'url_short': url_short
+
+    }
+    return render(request,'cliente/perfil.html', context)
