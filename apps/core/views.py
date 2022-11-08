@@ -4,6 +4,7 @@ from urllib.request import urlopen
 import re
 from apps.usuario.models import Usuario
 from django.views.generic.base import RedirectView
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from datetime import datetime
 
@@ -29,7 +30,7 @@ def formatterData(data):
         if (len(i)>1):
             date = datetime.strptime(i[1], '%d-%m-%Y')
             dias_a_vencer = date-now
-            print(type(dias_a_vencer))
+            # print(type(dias_a_vencer))
             name = i[2].split('**')
             dataFormateada['data'].append({
                 'index': f'{ind}', 
@@ -53,6 +54,9 @@ def filter(arr,param):
             res.append(i)
 
     return res
+
+
+@login_required(login_url='/usuario/login/')
 def Index(request):
     if request.user.is_authenticated:
         #get data
@@ -79,6 +83,7 @@ def Index(request):
         }
     return render(request,'index.html', context)
 
+@login_required(login_url='/usuario/login/')
 def Profile(request,id):
     data = getDataofPage(request.user.first_name)
     ####      ####   ############ 
@@ -103,30 +108,31 @@ def Profile(request,id):
     
 
 ###############BOTONES##############################
+@login_required(login_url='/usuario/login/')
 def Extender(request,usuario):
     # print(f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&ext=1")
     return redirect(f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&ext=1")
 
-
+@login_required(login_url='/usuario/login/')
 def Crear(request):
     if request.method == "POST":
         nombre = request.POST.get('nombre')
         usuario = request.POST.get('usuario')
         
-        print(nombre, usuario)
+        # print(nombre, usuario)
         return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&com={nombre}')
 
     else:
         return render(request, 'cliente/crear.html')
     
-
+@login_required(login_url='/usuario/login/')
 def Modificar(request):
     if request.method == "POST":
         nombre = request.POST.get('nombre')
         usuario = request.POST.get('usuario')
         last_user = request.POST.get('last_user')
         
-        print(nombre, usuario, last_user)
+        # print(nombre, usuario, last_user)
         return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={last_user}&new={usuario}&com={nombre}')
 
 
@@ -157,7 +163,7 @@ def Acortar(request,id):
     long_url = f"http://198.23.223.196/hSsfQeSmxkdW_mtv?{usuario_cliente}&v=10"
     # print(ShortUrl(long_url))
     url_short = ShortUrl(long_url)
-    print(url_short)
+    # print(url_short)
     context = {
         'cliente':cliente[0],
         'url_short': url_short
