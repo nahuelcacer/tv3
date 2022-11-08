@@ -71,9 +71,11 @@ def Index(request):
             clientes = res
         import operator
         clientes_ult = sorted(clientes, key=operator.itemgetter('vencimiento'))
+        total_clientes = len(clientes_ult)
         context = {
             "data":clientes_ult,
-            "creditos": formattedData['creditos']
+            "creditos": formattedData['creditos'],
+            "total_clientes":total_clientes
         }
     return render(request,'index.html', context)
 
@@ -137,6 +139,7 @@ def ShortUrl(url):
     connection = bitly_api.Connection(access_token=Access_token)
     shorten_url = connection.shorten(url)
     return shorten_url
+
 def Acortar(request,id):
     data = getDataofPage(request.user.first_name)
     ####      ####   ############ 

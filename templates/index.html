@@ -2,7 +2,12 @@
 {% block content %}
     <div>
         <div class="container">
-            <span>{{creditos}}</span>
+            <div class="row">
+                <div class="col-4">{{creditos}}</div>
+                <div class="col-4">Clientes: {{total_clientes}}</div>
+            </div>
+            <!-- <span>{{creditos}}</span>
+            <span sytle="padding-left:2rem;">Clientes: {{total_clientes}}</span> -->
             <form method="get">
                 <div class="row">
 
