@@ -24,11 +24,10 @@
         
         </script>
     
-    <div name="demo"><button class="btn btn-primary"  onclick="getLocation()">Get ubication</button></div>
+    <!-- <div name="demo"><button class="btn btn-primary"  onclick="getLocation()">Get ubication</button></div> -->
 
     <form action="" method="POST" class="form-group" enctype="multipart/form-data">
         {% csrf_token %}
-
         <input class="form-control mb-2" placeholder="Usuario" name="usuario"></input>
         <input class="form-control mb-2" placeholder="Nombre del cliente" name="nombre"></input>
         <button class="btn btn-success" type="submit">Crear</button>

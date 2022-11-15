@@ -125,8 +125,8 @@ def Crear(request):
         usuario = request.POST.get('usuario')
         
         # print(nombre, usuario)
-        # return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&com={nombre}')
-        return render(request, 'cliente/crear.html')
+        return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&com={nombre}')
+        # return render(request, 'cliente/crear.html')
     
     else:
         return render(request, 'cliente/crear.html')
