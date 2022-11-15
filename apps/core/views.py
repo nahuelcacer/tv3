@@ -56,8 +56,10 @@ def filter(arr,param):
     return res
 
 
+
 @login_required(login_url='/usuario/login/')
 def Index(request):
+    
     if request.user.is_authenticated:
         #get data
         search = request.GET.get('buscar')
@@ -113,15 +115,19 @@ def Extender(request,usuario):
     # print(f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&ext=1")
     return redirect(f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&ext=1")
 
+
+
 @login_required(login_url='/usuario/login/')
 def Crear(request):
+    
     if request.method == "POST":
         nombre = request.POST.get('nombre')
         usuario = request.POST.get('usuario')
         
         # print(nombre, usuario)
-        return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&com={nombre}')
-
+        # return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={usuario}&com={nombre}')
+        return render(request, 'cliente/crear.html')
+    
     else:
         return render(request, 'cliente/crear.html')
     
