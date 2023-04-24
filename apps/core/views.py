@@ -68,7 +68,7 @@ def Index(request):
         formattedData = formatterData(data)
         clientes = formattedData['data']
         ####rretiro
-        search = re.compile(search, re.IGNORECASE)
+        
         if search:
             res = []
             for i in clientes:
