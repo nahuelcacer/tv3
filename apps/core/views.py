@@ -30,7 +30,7 @@ def formatterData(data):
             date = datetime.strptime(i['Vencimiento'], '%d-%m-%Y')
             dias_a_vencer = date-now
             # print(type(dias_a_vencer))
-            # name = i[2].split('**')
+            name = i['Comentario'].split('**')
             dataFormateada['data'].append({
                 'index':data.index(i),
                 'usuario':i['Cuenta'],
@@ -38,10 +38,9 @@ def formatterData(data):
                 'vencimiento':date,
                 'vencimiento_set':f'{"{}/{}/{}".format(date.day, date.month, date.year)}',
                 'dias_a_vencer':f'{"{}".format(int(dias_a_vencer.days))}',
-                # 'nombre':f'{name[0]}',
+                'nombre':name[0],
                 # 'link':f'{name}'
             })
-            print(dataFormateada)
         
             # dataFormateada['creditos'] = i[0]
         
@@ -64,20 +63,21 @@ def Index(request):
         #get data
         search = request.GET.get('buscar')
         data = getDataWeb()['tabla']
-        print(data) 
+    
         #format data
         formattedData = formatterData(data)
         clientes = formattedData['data']
         ####rretiro
-        # if search:
-        #     res = []
-        #     for i in clientes:
-        #         if re.findall(search,i['nombre']):
-        #             res.append(i)
+        search = re.compile(search, re.IGNORECASE)
+        if search:
+            res = []
+            for i in clientes:
+                if re.findall(search,i['nombre']) or re.findall(search,str(i['index'])) or re.findall(search,i['usuario']):
+                    res.append(i)
                 
-        #     clientes = res
-        # import operator
-        # clientes_ult = sorted(clientes, key=operator.itemgetter('vencimiento'))
+            clientes = res
+        import operator
+        clientes_ult = sorted(clientes, key=operator.itemgetter('vencimiento'))
         total_clientes = len(clientes)
         # print(clientes_ult)
         context = {
@@ -89,7 +89,7 @@ def Index(request):
 
 @login_required(login_url='/usuario/login/')
 def Profile(request,id):
-    print(id)
+    
     data = getDataWeb()['tabla']
     ####      ####   ############ 
     #######   ####   ####     
