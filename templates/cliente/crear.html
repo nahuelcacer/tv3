@@ -3,29 +3,6 @@
 
 
 <div class="container mt-4">
-    <script>
-        var x = document.getElementsByTagName("demo");
-        
-        function getLocation() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success);
-          } else { 
-            x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-        }
-        function success(pos) {
-          const crd = pos.coords;
-
-          console.log('Your current position is:');
-          console.log(`Latitude : ${crd.latitude}`);
-          console.log(`Longitude: ${crd.longitude}`);
-          console.log(`More or less ${crd.accuracy} meters.`);
-        }
-        
-        </script>
-    
-    <!-- <div name="demo"><button class="btn btn-primary"  onclick="getLocation()">Get ubication</button></div> -->
-
     <form action="" method="POST" class="form-group" enctype="multipart/form-data">
         {% csrf_token %}
         <input class="form-control mb-2" placeholder="Usuario" name="usuario"></input>

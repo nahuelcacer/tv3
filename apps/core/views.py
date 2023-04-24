@@ -7,7 +7,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from datetime import datetime
-
+from iniciar import getDataWeb
 def getDataofPage(user=str):
     '''Obtiene datos de la pagina y retorna array con estos'''
     full_url = "http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?" + user
@@ -26,24 +26,24 @@ def formatterData(data):
     }
     for i in data:
         now = datetime.now()
-        ind = data.index(i)
         if (len(i)>1):
-            date = datetime.strptime(i[1], '%d-%m-%Y')
+            date = datetime.strptime(i['Vencimiento'], '%d-%m-%Y')
             dias_a_vencer = date-now
             # print(type(dias_a_vencer))
-            name = i[2].split('**')
+            # name = i[2].split('**')
             dataFormateada['data'].append({
-                'index': f'{ind}', 
-                'usuario':f'{i[0]}',
+                'index':data.index(i),
+                'usuario':i['Cuenta'],
                 # 'vencimiento':f'{"{}/{}/{}".format(date.day, date.month, date.year)}',
                 'vencimiento':date,
                 'vencimiento_set':f'{"{}/{}/{}".format(date.day, date.month, date.year)}',
                 'dias_a_vencer':f'{"{}".format(int(dias_a_vencer.days))}',
-                'nombre':f'{name[0]}',
-                'link':f'{name}'
+                # 'nombre':f'{name[0]}',
+                # 'link':f'{name}'
             })
-        else:
-            dataFormateada['creditos'] = i[0]
+            print(dataFormateada)
+        
+            # dataFormateada['creditos'] = i[0]
         
     return dataFormateada
 
@@ -63,31 +63,34 @@ def Index(request):
     if request.user.is_authenticated:
         #get data
         search = request.GET.get('buscar')
-        data = getDataofPage(request.user.first_name)
+        data = getDataWeb()['tabla']
+        print(data) 
         #format data
         formattedData = formatterData(data)
         clientes = formattedData['data']
+        ####rretiro
         # if search:
-        if search:
-            res = []
-            for i in clientes:
-                if re.findall(search,i['nombre']):
-                    res.append(i)
+        #     res = []
+        #     for i in clientes:
+        #         if re.findall(search,i['nombre']):
+        #             res.append(i)
                 
-            clientes = res
-        import operator
-        clientes_ult = sorted(clientes, key=operator.itemgetter('vencimiento'))
-        total_clientes = len(clientes_ult)
+        #     clientes = res
+        # import operator
+        # clientes_ult = sorted(clientes, key=operator.itemgetter('vencimiento'))
+        total_clientes = len(clientes)
+        # print(clientes_ult)
         context = {
-            "data":clientes_ult,
-            "creditos": formattedData['creditos'],
+            "data":clientes,
+            # "creditos": formattedData['creditos'],
             "total_clientes":total_clientes
         }
     return render(request,'index.html', context)
 
 @login_required(login_url='/usuario/login/')
 def Profile(request,id):
-    data = getDataofPage(request.user.first_name)
+    print(id)
+    data = getDataWeb()['tabla']
     ####      ####   ############ 
     #######   ####   ####     
     #### #### ####   ####

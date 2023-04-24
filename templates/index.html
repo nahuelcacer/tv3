@@ -22,7 +22,7 @@
             </form>
         </div>
         <div class="container mt-2 mb-2">
-            <a href="{% url 'apps.core:crear' %}" class="btn btn-success">Crear usuario</a>
+            <!-- <a href="{% url 'apps.core:crear' %}" class="btn btn-success">Crear usuario</a> -->
         </div>
         <div class="container table-responsive">
             <table class="table table-sm">
@@ -36,13 +36,15 @@
                 {% for i in data %}
                 <tr>
                     <td>{{i.index}}</td>
-                    {% comment %} <td>{{i.usuario}}</td> {% endcomment %}
-                    <td>{{i.nombre}}</td>
+                    <td>{{i.usuario}}</td>
+                    <!-- <td>{{i.nombre}}</td> -->
                     <td>{{i.vencimiento_set}}  | {{i.dias_a_vencer}} dias</td>
                     <td><a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-secondary">Ver</a></td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
+        
+            
     </div> 
 {% endblock  %}    
