@@ -1,50 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-4">{{creditos}}</div>
-                <div class="col-4">Clientes: {{total_clientes}}</div>
-            </div>
-            <!-- <span>{{creditos}}</span>
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">{{creditos}}</div>
+            <div class="col-4">Clientes: {{total_clientes}}</div>
+        </div>
+        <!-- <span>{{creditos}}</span>
             <span sytle="padding-left:2rem;">Clientes: {{total_clientes}}</span> -->
-            <form method="get">
-                <div class="row">
+        <form method="get">
+            <div class="row">
 
-                    <div class="col-8">
-                        <input type="text" placeholder="Buscar..."  class="form-control" name="buscar"></input>
-                    </div>
-                    <div class="col-4">
-                        
-                        <button type="submit" class="btn btn-primary">Buscar</button>
-                    </div>
+                <div class="col-8">
+                    <input type="text" placeholder="Buscar..." class="form-control" name="buscar"></input>
                 </div>
-            </form>
-        </div>
-        <div class="container mt-2 mb-2">
-            <!-- <a href="{% url 'apps.core:crear' %}" class="btn btn-success">Crear usuario</a> -->
-        </div>
-        <div class="container table-responsive">
-            <table class="table table-sm">
-                <tr>
-                    <th>*</th>
-                    {% comment %} <th>Usuario</th> {% endcomment %}
-                    <th>Nombre</th>
-                    <th>Vencimiento</th>
-                    <th>Agregar</th>
-                </tr>
-                {% for i in data %}
-                <tr>
-                    <td>{{i.index}}</td>
-                    <td>{{i.usuario}}</td>
-                    <!-- <td>{{i.nombre}}</td> -->
-                    <td>{{i.vencimiento_set}}  | {{i.dias_a_vencer}} dias</td>
-                    <td><a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-secondary">Ver</a></td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-        
-            
-    </div> 
-{% endblock  %}    
+                <div class="col-4">
+
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-2 mb-2">
+        <!-- <a href="{% url 'apps.core:crear' %}" class="btn btn-success">Crear usuario</a> -->
+    </div>
+    <div class="container table-responsive">
+        <table class="table table-sm">
+            <!-- <tr>
+
+                {% comment %} <th>Usuario</th> {% endcomment %}
+                <th>Nombre</th>
+                <th>Vencimiento</th>
+                <th>Agregar</th>
+            </tr> -->
+            {% for i in data %}
+            <tr>
+
+                <td style="width: 4.5rem;">{{i.usuario}}</td>
+                <!-- <td>{{i.nombre}}</td> -->
+                <td class="d-flex flex-column">
+                    <div style="width: 3.5rem;">
+                        <span style="font-size:1rem;">{{i.vencimiento_set}}</span>
+                        {% if i.dias_a_vencer > 3%}
+                        <span style="color:green;font-size:1rem"><b>{{i.dias_a_vencer}} dias</b></span>
+                        {% else %}
+                        <span style="color:red;font-size:1rem"><b>{{i.dias_a_vencer}} dias</b></span>
+                        {%endif%}
+
+                    </div>
+                </td>
+                <td>
+                    <a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-outline-primary">
+                        <i class="bi bi-person"></i>
+                    </a>
+                </td>
+                <td><a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-success"><i class="bi bi-plus-circle"></i></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+</div>
+{% endblock %}

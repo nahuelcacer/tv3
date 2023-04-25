@@ -37,7 +37,7 @@ def formatterData(data):
                 # 'vencimiento':f'{"{}/{}/{}".format(date.day, date.month, date.year)}',
                 'vencimiento':date,
                 'vencimiento_set':f'{"{}/{}/{}".format(date.day, date.month, date.year)}',
-                'dias_a_vencer':f'{"{}".format(int(dias_a_vencer.days))}',
+                'dias_a_vencer':int(dias_a_vencer.days),
                 'nombre':name[0],
                 # 'link':f'{name}'
             })
@@ -72,7 +72,7 @@ def Index(request):
         if search:
             res = []
             for i in clientes:
-                if re.findall(search,i['nombre']) or re.findall(search,str(i['index'])) or re.findall(search,i['usuario']):
+                if re.findall(search,i['nombre'], re.IGNORECASE) or re.findall(search,i['usuario'], re.IGNORECASE):
                     res.append(i)
                 
             clientes = res
