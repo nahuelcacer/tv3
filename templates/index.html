@@ -16,13 +16,13 @@
                 </div>
                 <div class="col-4">
 
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </div>
         </form>
     </div>
     <div class="container mt-2 mb-2">
-        <!-- <a href="{% url 'apps.core:crear' %}" class="btn btn-success">Crear usuario</a> -->
+        <a href="{% url 'apps.core:crear' %}" class="btn btn-secondary"><i class="bi bi-person-plus"></i></a>
     </div>
     <div class="container table-responsive">
         <table class="table table-sm">
@@ -38,23 +38,27 @@
 
                 <td style="width: 4.5rem;">{{i.usuario}}</td>
                 <!-- <td>{{i.nombre}}</td> -->
-                <td class="d-flex flex-column">
-                    <div style="width: 3.5rem;">
-                        <span style="font-size:1rem;">{{i.vencimiento_set}}</span>
+                <td style="width: 4.5rem;" >
+                        <!-- <span style="font-size:1rem;"></span> -->
                         {% if i.dias_a_vencer > 3%}
-                        <span style="color:green;font-size:1rem"><b>{{i.dias_a_vencer}} dias</b></span>
+                        <span style="font-size:1rem">{{i.vencimiento_set}}</span>
                         {% else %}
-                        <span style="color:red;font-size:1rem"><b>{{i.dias_a_vencer}} dias</b></span>
+                        <span style="color:rgb(244, 120, 120);font-size:1rem">{{i.vencimiento_set}}</span>
                         {%endif%}
-
-                    </div>
                 </td>
                 <td>
-                    <a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-outline-primary">
-                        <i class="bi bi-person"></i>
-                    </a>
+                    <div>
+
+                        <a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-outline-secondary" style="margin-right:0.5rem;">
+                            <i class="bi bi-person"></i>
+                        </a>
+                        
+
+                        <a href="{% url 'apps.core:extender' i.usuario %}" class="btn btn-success" style="margin-right:0.5rem;">
+                            <i class="bi bi-plus-circle"></i>
+                        </a>
+                    </div>
                 </td>
-                <td><a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-success"><i class="bi bi-plus-circle"></i></a></td>
             </tr>
             {% endfor %}
         </table>

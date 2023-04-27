@@ -1,35 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-        <div>
-            <b>Id:</b> {{cliente.index}}
-        </div><div>
-            <b>Usuario:</b> {{cliente.usuario}}
-        </div><div>
-            <b>Nombre:</b> {{cliente.nombre}}
-        </div><div>
-            <b>Venc:</b> {{cliente.vencimiento}}
-        </div><div>
-            <b>Link:</b> {{cliente.link}}
+        <div class="row gy-3 gx-1 mt-4">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0">Vencimiento</h6>
+                    {% if cliente.dias_a_vencer > 3 %}
+                        <small class="text-body-secondary">{{cliente.vencimiento_set}}</small>
+                    {% else %}
+                        <small style="color: rgb(244, 120, 120);" class="text-body-secondary">{{cliente.vencimiento_set}}</small>
+                    {% endif %}
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0">Dias para vencer</h6>
+                      <small class="text-body-secondary">{{cliente.dias_a_vencer}}</small>
+                    </div>
+                  
+                  </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0">Url</h6>
+                      <small class="text-body-secondary">{{url}}</small>
+                    </div>
+                  
+                  </li>
+            </ul>
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Nombre del Cliente</label>
+                    <input class="form-control" value='{{cliente.nombre}}'></input>
+                </div>
+                <div class="col-sm-6">
+                    <label for="Username" class="form-label">Usuario</label>
+                    <div class="input-group has-validation" >
+                        <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" id="username" value={{cliente.usuario}} placeholder="Username" required="">
+                      <div class="invalid-feedback">
+                          Your username is required.
+                        </div>
+                      </div>
+
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-secondary btn-block">Modificar</button>
+                </div>
+                
         </div>
-        {% if url_short %}
-        <h2>{{url_short.url}}</h2>
-        {% endif %}
-        <div class="mt-4">
-            <a href='{% url 'apps.core:extender' cliente.usuario %}' class="btn btn-primary mr-4">Extender</a>
-            <a href='{% url 'apps.core:acortar' cliente.index %}' class="btn btn-outline-primary">Generar URL</a>
-        </div> 
+        <div style="text-align:center">
+          <!-- <p>{{cliente.usuario}}</p>
+          <p>{{cliente.nombre}}</p>
+          <p>{{cliente.dias_a_vencer}}</p>
+          <p>{{cliente.vencimiento_set}}</p>
+          <p>{{cliente.url}}</p>
+
+          <h1>{{url}}</h1> -->
+        </div>
     </div>
-    <hr></hr>
-    <!--MODIFICAR USUARIO-->
-    <div class="container">
-        <h2 class="mt-4">Modificar Usuario</h2>
-        <form action="modificar" method="POST" class="form-group mt-4" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input name="last_user" value="{{cliente.usuario}}" hidden></input>
-            <input class="form-control mb-2" placeholder="Usuario" name="usuario"></input>
-            <input class="form-control mb-2" placeholder="Nombre del cliente" name="nombre"></input>
-            <button class="btn btn-success" type="submit">Modificar</button>
-        </form>
-    </div>
+    
+    
 {% endblock %}
