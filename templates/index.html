@@ -9,11 +9,21 @@
         <!-- <span>{{creditos}}</span>
             <span sytle="padding-left:2rem;">Clientes: {{total_clientes}}</span> -->
         <form method="get">
+            
             <div class="row">
-
-                <div class="col-8">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
+                  </div>
+                <!-- <div class="input-group mb-3">
                     <input type="text" placeholder="Buscar..." class="form-control" name="buscar"></input>
-                </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Button</button> 
+                      </div>
+                </div> -->
+                
                 <div class="col-4">
 
                     <button type="submit" class="btn btn-secondary">Buscar</button>
@@ -26,38 +36,29 @@
     </div>
     <div class="container table-responsive">
         <table class="table table-sm">
-            <!-- <tr>
-
-                {% comment %} <th>Usuario</th> {% endcomment %}
-                <th>Nombre</th>
-                <th>Vencimiento</th>
-                <th>Agregar</th>
-            </tr> -->
             {% for i in data %}
             <tr>
 
-                <td style="width: 4.5rem;">{{i.usuario}}</td>
+                <td>{{i.usuario}}</td>
                 <!-- <td>{{i.nombre}}</td> -->
-                <td style="width: 4.5rem;" >
-                        <!-- <span style="font-size:1rem;"></span> -->
-                        {% if i.dias_a_vencer > 3%}
-                        <span style="font-size:1rem">{{i.vencimiento_set}}</span>
-                        {% else %}
-                        <span style="color:rgb(244, 120, 120);font-size:1rem">{{i.vencimiento_set}}</span>
-                        {%endif%}
+                <td>
+                    {% if i.dias_a_vencer > 3%}
+                    <span style="font-size:1rem">{{i.vencimiento_set}}</span>
+                    {% else %}
+                    <span style="color:rgb(244, 120, 120);font-size:1rem">{{i.vencimiento_set}}</span>
+                    {%endif%}
                 </td>
                 <td>
-                    <div>
-
-                        <a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-outline-secondary" style="margin-right:0.5rem;">
-                            <i class="bi bi-person"></i>
-                        </a>
-                        
-
-                        <a href="{% url 'apps.core:extender' i.usuario %}" class="btn btn-success" style="margin-right:0.5rem;">
-                            <i class="bi bi-plus-circle"></i>
-                        </a>
-                    </div>
+                    <a href="{% url 'apps.core:perfil' i.index %}" class="btn btn-outline-secondary"
+                        style="margin-right:0.5rem;">
+                        <i class="bi bi-person"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'apps.core:extender' i.usuario %}" class="btn btn-success"
+                        style="margin-right:0.5rem;">
+                        <i class="bi bi-plus-circle"></i>
+                    </a>
                 </td>
             </tr>
             {% endfor %}

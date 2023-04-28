@@ -135,7 +135,7 @@ def Extender(request,usuario):
     
     headers['cookie'] = response_1.headers.get('Set-Cookie')
     url = f"http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?M4t14sCh4c0&usr={usuario}&ext=1"
-    payload = f"transfer=1&receptor=1&cuenta=ff{usuario}&orden=Vencimiento&cantidad=1&extend=&modusr=&modcom=&newusr=&newcom="
+    payload = f"transfer=1&receptor=1&cuenta={usuario}&orden=Vencimiento&cantidad=1&extend=&modusr=&modcom=&newusr=&newcom="
     response_3 = session.post(url, headers=headers, data=payload)
   
     print(usuario)
