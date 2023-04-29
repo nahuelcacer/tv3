@@ -1,39 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
+<div class="mt-4">
     <div class="container">
-        <div class="row">
-            <div class="col-4">{{creditos}}</div>
-            <div class="col-4">Clientes: {{total_clientes}}</div>
-        </div>
-        <!-- <span>{{creditos}}</span>
-            <span sytle="padding-left:2rem;">Clientes: {{total_clientes}}</span> -->
         <form method="get">
-            
-            <div class="row">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Button</button>
-                    </div>
-                  </div>
-                <!-- <div class="input-group mb-3">
+            <div class="row g-2">
+                <div class="col-8">
+
                     <input type="text" placeholder="Buscar..." class="form-control" name="buscar"></input>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Button</button> 
-                      </div>
-                </div> -->
-                
-                <div class="col-4">
+                </div>
+                <div class="col">
 
                     <button type="submit" class="btn btn-secondary">Buscar</button>
                 </div>
+                <div class="col">
+                    <a href="{% url 'apps.core:crear' %}" class="btn btn-secondary"><i class="bi bi-person-plus"></i></a>
+
+                </div>
+                
             </div>
         </form>
     </div>
-    <div class="container mt-2 mb-2">
-        <a href="{% url 'apps.core:crear' %}" class="btn btn-secondary"><i class="bi bi-person-plus"></i></a>
+    <div class="container">
+        <div class="row gy-3 gx-1 mt-1">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <!-- <div> -->
+                        <h6 class="my-0">Creditos</h6>
+                        <small class="text-body-secondary">{{creditos}}</small>
+                    <!-- </div> -->
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <!-- <div> -->
+                        <h6 class="my-0">Clientes</h6>
+                        <small class="text-body-secondary">{{total_clientes}}</small>
+                    <!-- </div> -->
+                </li>
+            </ul>
+        </div>
     </div>
+
+    <!-- TABLE -->
     <div class="container table-responsive">
         <table class="table table-sm">
             {% for i in data %}

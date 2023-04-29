@@ -10,17 +10,7 @@ from .utilities import si_tiene_url
 # Create your views here.
 from datetime import datetime
 from iniciar import getDataWeb
-def getDataofPage(user=str):
-    '''Obtiene datos de la pagina y retorna array con estos'''
-    full_url = "http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?" + user
-    response = urlopen(full_url)
-    data_cr = response.read().decode('utf-8')
-    data_arr = data_cr.rsplit('\n\n')
-    data = []
-    for i in data_arr:
-        data.append(i.rsplit("\n"))
-    data.pop()
-    return data
+
 def formatterData(data):
     dataFormateada = {
         "data":[],
@@ -60,13 +50,14 @@ def Index(request):
     if request.user.is_authenticated:
         #get data
         search = request.GET.get('buscar')
-        data = getDataWeb()['tabla']
-    
+        data = getDataWeb()
+        
         #format data
-        formattedData = formatterData(data)
+        formattedData = formatterData(data['tabla'])
         clientes = formattedData['data']
         ####rretiro
         
+        total_clientes = len(clientes)
         if search:
             res = []
             for i in clientes:
@@ -76,9 +67,9 @@ def Index(request):
             clientes = res
         import operator
         clientes_ult = sorted(clientes, key=operator.itemgetter('vencimiento'))
-        total_clientes = len(clientes)
         # print(clientes_ult)
-        context = {
+        context = { 
+            "creditos":data['creditos'],
             "data":clientes,
             # "creditos": formattedData['creditos'],
             "total_clientes":total_clientes
