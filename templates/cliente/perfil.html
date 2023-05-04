@@ -28,24 +28,29 @@
                   
                   </li>
             </ul>
+              <form action="{% url 'apps.core:modificar' %}" id="modForm" name="modificar" method="POST" class="form-group" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input name="last_user" value={{cliente.usuario}} hidden></input>
+                <input name="last_name" value={{cliente.nombre}} hidden></input>
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Nombre del Cliente</label>
-                    <input class="form-control" value='{{cliente.nombre}}'></input>
+                    <input class="form-control" name="nombre" value='{{cliente.nombre}}'></input>
                 </div>
                 <div class="col-sm-6">
                     <label for="Username" class="form-label">Usuario</label>
                     <div class="input-group has-validation" >
                         <span class="input-group-text">@</span>
-                        <input type="text" class="form-control" id="username" value={{cliente.usuario}} placeholder="Username" required="">
+                        <input type="text" class="form-control" id="username" name="usuario" value={{cliente.usuario}} placeholder="Username" required="">
                       <div class="invalid-feedback">
                           Your username is required.
                         </div>
                       </div>
 
                 </div>
-                {% comment %} <div class="btn-group btn-group-justified"> {% endcomment %}
+              </form>
+              {% comment %} <div class="btn-group btn-group-justified"> {% endcomment %}
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-secondary btn-block">Modificar</button>
+                    <button type="submit" form="modForm" class="btn btn-secondary btn-block">Modificar</button>
                   </div>
                   <div class="btn-group" role="group">
                     <a href="{% url 'apps.core:delete' cliente.usuario %}" class="btn btn-danger btn-block">

@@ -151,7 +151,7 @@ def Crear(request,session,headers,response_2):
         url = "http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?M4t14sCh4c0"
         response_3 = session.post(url, headers=headers, data=payload)
 
-        response_html = f'<h1>Cliente creado usuario:{usuario}, nombre:{nombre}</h1>'
+        response_html = f'<h1>Cliente creado, usuario:{usuario}, nombre:{nombre}</h1>'
         response_html += '<button onclick="window.location.href=\'/\'">Volver</button>'
 
         return HttpResponse(response_html)
@@ -160,14 +160,27 @@ def Crear(request,session,headers,response_2):
         return render(request, 'cliente/crear.html')
     
 @login_required(login_url='/usuario/login/')
-def Modificar(request):
+@login_ott_decorator
+def Modificar(request,session,headers,response_2):
     if request.method == "POST":
         nombre = request.POST.get('nombre')
         usuario = request.POST.get('usuario')
         last_user = request.POST.get('last_user')
-        
-        # print(nombre, usuario, last_user)
-        return redirect(f'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?{request.user.first_name}&usr={last_user}&new={usuario}&com={nombre}')
+        last_name = request.POST.get('last_name')
+
+
+
+        payload = f"transfer=&receptor=&cuenta={last_user}&orden=Vencimiento&cantidad=1&modusr={usuario}&modcom={nombre}&modif=&newusr=&newcom="
+        url = "http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?M4t14sCh4c0"
+        response_3 = session.post(url, headers=headers, data=payload)
+        response_html = f'<h1>Usuario Modificado</h1>'
+        response_html += f'<div>nombre: {last_name}, usuario: {last_user} </div>'
+        response_html += f'<h1>Usuario Nuevo</h1>'
+        response_html += f'<div>nombre: {nombre}, usuario: {usuario} </div>'
+        response_html += '<button class="btn btn-primary" onclick="window.location.href=\'/\'">Volver</button>'
+
+        return HttpResponse(response_html)
+    
 
 
 @login_required(login_url='/usuario/login/')
