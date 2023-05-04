@@ -168,11 +168,13 @@ def Modificar(request,session,headers,response_2):
         last_user = request.POST.get('last_user')
         last_name = request.POST.get('last_name')
 
+        setNombre = nombre.split(' ')
+        fNombre = "+".join(setNombre)
 
-
-        payload = f"transfer=&receptor=&cuenta={last_user}&orden=Vencimiento&cantidad=1&modusr={usuario}&modcom={nombre}&modif=&newusr=&newcom="
+        payload = f"transfer=1&receptor=1&cuenta={last_user}&orden=Vencimiento&cantidad=1&modusr={usuario}&modcom={fNombre}&modif=&newusr=&newcom="
         url = "http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php?M4t14sCh4c0"
         response_3 = session.post(url, headers=headers, data=payload)
+        print(payload)
         response_html = f'<h1>Usuario Modificado</h1>'
         response_html += f'<div>nombre: {last_name}, usuario: {last_user} </div>'
         response_html += f'<h1>Usuario Nuevo</h1>'

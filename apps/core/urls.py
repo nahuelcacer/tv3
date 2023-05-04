@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from iniciar import Extender
 app_name = 'apps.core'
 
 

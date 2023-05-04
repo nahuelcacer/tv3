@@ -15,6 +15,6 @@ def login_ott_decorator(funcion):
         password = {'pass': 'mati', 'envPass': ''}
         response_2 = session.post(login_url, headers=headers, data=password)
         headers['cookie'] = response_1.headers.get('Set-Cookie')
-        print(headers)
+       
         return funcion(session=session,headers=headers,response_2=response_2, *args, **kwargs)
     return wrapper
