@@ -31,7 +31,11 @@
               <form action="{% url 'apps.core:modificar' %}" id="modForm" name="modificar" method="POST" class="form-group" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input name="last_user", value={{cliente.usuario}}, hidden></input>
+                {% if cliente.nombre %}
                 <input name="last_name", value={{cliente.nombre}}, hidden></input>
+                {%else%}
+                <input name="last_name", value="No tiene nombre", hidden></input>
+                {%endif%}
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Nombre del Cliente</label>
                     <input class="form-control" name="nombre" value='{{cliente.nombre}}'></input>
