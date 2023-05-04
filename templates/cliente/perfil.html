@@ -43,9 +43,17 @@
                       </div>
 
                 </div>
-                <div class="col-12">
-                    <button class="btn btn-secondary btn-block">Modificar</button>
-                </div>
+                {% comment %} <div class="btn-group btn-group-justified"> {% endcomment %}
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary btn-block">Modificar</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <a href="{% url 'apps.core:delete' cliente.usuario %}" class="btn btn-danger btn-block">
+                      Eliminar
+                    </a>
+                  </div>
+                {% comment %} </div> {% endcomment %}
+                
                 
         </div>
         <div style="text-align:center">

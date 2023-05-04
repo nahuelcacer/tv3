@@ -1,4 +1,4 @@
-
+import requests
 
 def si_tiene_url(arr):
     if len(arr) <=1:
@@ -6,3 +6,4 @@ def si_tiene_url(arr):
         return arr
    
     return arr
+

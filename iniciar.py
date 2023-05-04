@@ -1,25 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
+from apps.core.decorators import login_ott_decorator
 
-def getDataWeb():
-    session = requests.Session()
-
-    # Enviar el nombre de usuario
-    login_url = 'http://198.23.223.196/hSsfQeSmxkdW_mtv/credit.php'
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
-    }
-    username = {'usr': 'M4t14sCh4c0', 'next': ''}
-    response_1 = session.post(login_url, headers=headers, data=username)
-
-    # Enviar la contraseña
-    password = {'pass': 'mati', 'envPass': ''}
-    response_2 = session.post(login_url, headers=headers, data=password)
-
-
-    # print(response_2.text)
-
+@login_ott_decorator
+def getDataWeb(session,headers,response_2):
+    
     soup = BeautifulSoup(response_2.text, 'html.parser')
 
     data = {}
